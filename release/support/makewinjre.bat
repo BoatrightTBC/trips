@@ -1,1 +1,0 @@
-jlink --output jre --add-modules java.se,jdk.unsupported,jdk.jsobject,jdk.xml.dom
