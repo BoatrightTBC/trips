@@ -22,9 +22,9 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName=\{#MyAppName}
 DefaultGroupName={#MyAppName}
 ;LicenseFile=C:\TripsSafe\License.rtf
-InfoBeforeFile=C:\TripsSafe\Pre-Install.rtf
-InfoAfterFile=C:\TripsSafe\PostInstall.rtf
-OutputDir=c:\tripssafe\Setups
+InfoBeforeFile=C:\Users\rick\Documents\GitHub\trips\install\Pre-Install.rtf
+InfoAfterFile=C:\Users\rick\Documents\GitHub\trips\install\PostInstall.rtf
+OutputDir=C:\TripsSafe\Setups
 OutputBaseFilename=TripsInstall
 SetupIconFile=C:\TRIPS\trips.ico
 Compression=lzma
@@ -36,7 +36,7 @@ PrivilegesRequired=none
 RestartIfNeededByRun=False
 ShowLanguageDialog=no
 LanguageDetectionMethod=none
-AppReadmeFile=C:\TripsSafe\readne.md
+AppReadmeFile=C:\TripsSafe\readme.md
 VersionInfoVersion=0.65
 VersionInfoCompany=Team Gannon
 VersionInfoDescription=Terran Republic Info for Plotting Stars
@@ -45,7 +45,7 @@ VersionInfoProductName=TRIPS
 MinVersion=0,6.1
 
 [InstallDelete]
-Type: files; Name: "{app}\tripsdb.mv.db"
+Type: files; Name: "{app}\data\tripsdb.mv.db"
 
 [Types]
 Name: "full"; Description: "Install program and download sample data"; Flags: iscustom
@@ -55,7 +55,7 @@ Name: "base"; Description: "Install program only"
 Name: "program"; Description: "Program Files"; Types: full base; Flags: fixed
 Name: "data"; Description: "Sample Data Files"; Types: full
 Name: "data\small"; Description: "Sample data 70 LY sphere"
-;Name: "data\big"; Description: "270 ly diameter big sample data"
+Name: "data\big"; Description: "270 ly diameter big sample data"
 Name: "data\chv"; Description: "Old ChView data files"
 
 [Files]
@@ -65,12 +65,12 @@ Source: "C:\TRIPS\trips.ico"; DestDir: "{app}"; Components: program
 Source: "C:\TRIPS\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs ignoreversion; Components: program
 Source: "C:\TRIPS\javafx-sdk-15\*"; DestDir: "{app}\javafx-sdk-15"; Flags: recursesubdirs ignoreversion; Components: program
 Source: "C:\TRIPS\data\*"; DestDir: "{app}\data"; Flags: recursesubdirs ignoreversion; Components: program; Excludes: "*.db"
-Source: "{tmp}\Trips-normal-names-70.xlsx"; DestDir: "{app}\files\Excel"; Flags: external; Components: data\small
-;Source: "{tmp}\Trips-normal-names-270.xlsx"; DestDir: "{app}\files\Excel"; Components: data\big; Flags: external
-Source: "{tmp}\25LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; Components: data\chv
-Source: "{tmp}\100LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; Components: data\chv
-Source: "{tmp}\SOPHANTS.CHV"; DestDir: "{app}\files\ChView"; Flags: external; Components: data\chv
-Source: "{tmp}\TERRAGRP.CHV"; DestDir: "{app}\files\ChView"; Flags: external; Components: data\chv
+Source: "{tmp}\Trips-normal-names-70.xlsx"; DestDir: "{app}\files\Excel"; ExternalSize: 1945600 ; Flags: external; Components: data\small
+Source: "{tmp}\Trips-normal-names-270.xlsx"; DestDir: "{app}\files\Excel"; ExternalSize: 98926592; Components: data\big; Flags: external
+Source: "{tmp}\25LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 26264 ; Components: data\chv
+Source: "{tmp}\100LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
+Source: "{tmp}\SOPHANTS.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
+Source: "{tmp}\TERRAGRP.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 15360 ; Components: data\chv
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -120,10 +120,10 @@ begin
     if WizardIsComponentSelected('data\small') then begin
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-70.xlsx', '70LY data', '');
     end;
-;    if WizardIsComponentSelected('data\big') then begin
-;      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-270.xlsx', '270LY data', '');
-;    end;
-   if WizardIsComponentSelected('data\chv') then begin
+    if WizardIsComponentSelected('data\big') then begin
+      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-270.xlsx', '270LY data', '');
+    end;
+    if WizardIsComponentSelected('data\chv') then begin
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/25LY-H.CHV', '25LY-H.CHV', '');
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/100LY-H.CHV', '100LY-H.CHV', '');
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/SOPHANTS.CHV', 'SOPHANTS.CHV', '');
