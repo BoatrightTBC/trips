@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Trips"
-#define MyAppVersion "0.65"
+#define MyAppVersion "0.66"
 #define MyAppPublisher "Team Gannon"
 #define MyAppURL "https://charlesegannon.com/wp/my-worlds/terran-republic/"
 #define MyAppExeName "TripsRun.bat"
@@ -37,7 +37,7 @@ RestartIfNeededByRun=False
 ShowLanguageDialog=no
 LanguageDetectionMethod=none
 AppReadmeFile=C:\TripsSafe\readme.md
-VersionInfoVersion=0.65
+VersionInfoVersion=0.66
 VersionInfoCompany=Team Gannon
 VersionInfoDescription=Terran Republic Info for Plotting Stars
 VersionInfoCopyright=2020, 2021 Charles E Gannon
