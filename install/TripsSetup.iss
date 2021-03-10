@@ -6,6 +6,7 @@
 #define MyAppPublisher "Team Gannon"
 #define MyAppURL "https://charlesegannon.com/wp/my-worlds/terran-republic/"
 #define MyAppExeName "TripsRun.bat"
+#define VCLStyle "Windows10.vsf"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -26,7 +27,7 @@ InfoBeforeFile=C:\Users\rick\Documents\GitHub\trips\install\Pre-Install.rtf
 InfoAfterFile=C:\Users\rick\Documents\GitHub\trips\install\PostInstall.rtf
 OutputDir=C:\TripsSafe\Setups
 OutputBaseFilename=TripsInstall
-SetupIconFile=C:\TRIPS\trips.ico
+SetupIconFile=C:\Users\rick\Documents\GitHub\trips\tripsWin.ico
 Compression=lzma
 SolidCompression=yes
 AlwaysShowComponentsList=yes
@@ -36,13 +37,16 @@ PrivilegesRequired=none
 RestartIfNeededByRun=False
 ShowLanguageDialog=no
 LanguageDetectionMethod=none
-AppReadmeFile=C:\TripsSafe\readme.md
+DisableWelcomePage=no
+AppReadmeFile=C:\Users\rick\Documents\GitHub\trips\readme.md
 VersionInfoVersion=0.66
 VersionInfoCompany=Team Gannon
-VersionInfoDescription=Terran Republic Info for Plotting Stars
+VersionInfoDescription=Terran Republic Interstellar Plotting System
 VersionInfoCopyright=2020, 2021 Charles E Gannon
 VersionInfoProductName=TRIPS
 MinVersion=0,6.1
+WizardImageFile=images\WizModernImage-IS.bmp
+WizardSmallImageFile=images\WizModernSmallImage-IS.bmp
 
 [InstallDelete]
 Type: files; Name: "{app}\data\tripsdb.mv.db"
@@ -59,9 +63,11 @@ Name: "data\big"; Description: "270 ly diameter big sample data"
 Name: "data\chv"; Description: "Old ChView data files"
 
 [Files]
+Source: VclStylesinno.dll; DestDir: {app}; Flags: dontcopy
+Source: {#VCLStyle}; DestDir: {app}; Flags: dontcopy
 Source: "C:\TRIPS\TripsRun.bat"; DestDir: "{app}"; Components: program
 Source: "C:\TRIPS\trips.jar"; DestDir: "{app}"; Flags: ignoreversion; Components: program
-Source: "C:\TRIPS\trips.ico"; DestDir: "{app}"; Components: program
+Source: "C:\TRIPS\tripsWin.ico"; DestDir: "{app}"; Components: program
 Source: "C:\TRIPS\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs ignoreversion; Components: program
 Source: "C:\TRIPS\javafx-sdk-15\*"; DestDir: "{app}\javafx-sdk-15"; Flags: recursesubdirs ignoreversion; Components: program
 Source: "C:\TRIPS\data\*"; DestDir: "{app}\data"; Flags: recursesubdirs ignoreversion; Components: program; Excludes: "*.db"
@@ -69,8 +75,8 @@ Source: "{tmp}\Trips-normal-names-70.xlsx"; DestDir: "{app}\files\Excel"; Extern
 Source: "{tmp}\Trips-normal-names-270.xlsx"; DestDir: "{app}\files\Excel"; ExternalSize: 98926592; Components: data\big; Flags: external
 Source: "{tmp}\25LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 26264 ; Components: data\chv
 Source: "{tmp}\100LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
-Source: "{tmp}\SOPHANTS.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
-Source: "{tmp}\TERRAGRP.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 15360 ; Components: data\chv
+Source: "{tmp}\SOPHONTS.chv"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
+Source: "{tmp}\TERRAGRP.chv"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 15360 ; Components: data\chv
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -98,6 +104,23 @@ Name: "{app}\javafx-sdk-15"
 Name: "{app}\logs"
 
 [Code]
+//Import the LoadVCLStyle function from VclStylesInno.DLL
+procedure LoadVCLStyle(VClStyleFile: String); external 'LoadVCLStyleW@files:VclStylesInno.dll stdcall';
+// Import the UnLoadVCLStyles function from VclStylesInno.DLL
+procedure UnLoadVCLStyles; external 'UnLoadVCLStyles@files:VclStylesInno.dll stdcall';
+
+function InitializeSetup(): Boolean;
+begin
+  ExtractTemporaryFile('{#VCLStyle}');
+  LoadVCLStyle(ExpandConstant('{tmp}\{#VCLStyle}'));
+  Result := True;
+end;
+
+procedure DeinitializeSetup();
+begin
+	UnLoadVCLStyles;
+end;
+
 var
   DownloadPage: TDownloadWizardPage;
 
@@ -118,16 +141,16 @@ begin
   if CurPageID = wpReady then begin
     DownloadPage.Clear;
     if WizardIsComponentSelected('data\small') then begin
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-70.xlsx', '70LY data', '');
+      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-70.xlsx', 'Trips-normal-names-70.xlsx', '');
     end;
     if WizardIsComponentSelected('data\big') then begin
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-270.xlsx', '270LY data', '');
+      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-270.xlsx', 'Trips-normal-names-270.xlsx', '');
     end;
     if WizardIsComponentSelected('data\chv') then begin
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/25LY-H.CHV', '25LY-H.CHV', '');
       DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/100LY-H.CHV', '100LY-H.CHV', '');
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/SOPHANTS.CHV', 'SOPHANTS.CHV', '');
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/TERRAGRP.CHV', 'TERRAGRP.CHV', '');
+      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/SOPHONTS.chv', 'SOPHONTS.chv', '');
+      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/TERRAGRP.chv', 'TERRAGRP.chv', '');
     end;
     DownloadPage.Show;
     try
