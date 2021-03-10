@@ -17,3 +17,7 @@ Version 0.66 closes the following issues:
 - Activate properties in sidebar when clicking properties in right-click context menu.
 - Fix highlight star.
 - Fix label location on edit-star form.
+- Fix direction of rotation problem.
+  - Program was acting as though the mouse was attached to the **back** of the star field so, moving the mouse right rotated the front of the star field to the left.  
+    This was very confusing.
+  - The program now acts as if the mouse is attached to the **front** of the star.
