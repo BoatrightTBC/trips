@@ -9,12 +9,10 @@
 - Implement edit/delete for routes.
   - Add delete route from sidebar.
   - Add "change color" to route edit.
-- Fix typeahead in star select fields.
-  - Sort star names in combo boxes alphabetically.
-  - Replace spaces with underlines in combo box because typing space stops the search.
+- Sort star names in combo boxes alphabetically.
 - Alphabetize route list in sidebar.
 - Alphabetize star names in sidebar.
-- Activate properties in sidebar when clicking properties in right-click context menu.
+- Open and update properties tab in the sidebar when clicking properties in right-click context menu.
 - Fix label location on edit-star form.
 - Fix direction of rotation problem.
   - Program was acting as though the mouse was attached to the **back** of the star field so, moving the mouse right rotated the front of the star field to the left.  
