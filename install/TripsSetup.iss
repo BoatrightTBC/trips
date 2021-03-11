@@ -65,6 +65,7 @@ Name: "data\chv"; Description: "Old ChView data files"
 [Files]
 Source: VclStylesinno.dll; DestDir: {app}; Flags: dontcopy
 Source: {#VCLStyle}; DestDir: {app}; Flags: dontcopy
+Source: "./ReleaseNotes_0.66.pdf"; DestDir: "{app}"; Components: program
 Source: "C:\TRIPS\TripsRun.bat"; DestDir: "{app}"; Components: program
 Source: "C:\TRIPS\trips.jar"; DestDir: "{app}"; Flags: ignoreversion; Components: program
 Source: "C:\TRIPS\tripsWin.ico"; DestDir: "{app}"; Components: program
@@ -91,6 +92,7 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon; IconFilename: "{app}\myicon.ico"
 
 [Run]
+Filename: "{app}\ReleaseNotes_0.66.pdf"; Description: "Release notes for version 0.66"; Flags: postinstall shellexec skipifsilent; Verb: "open" 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: shellexec postinstall skipifsilent
 
 [Dirs]
