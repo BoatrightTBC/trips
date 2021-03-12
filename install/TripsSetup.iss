@@ -76,8 +76,8 @@ Source: "{tmp}\Trips-normal-names-70.xlsx"; DestDir: "{app}\files\Excel"; Extern
 Source: "{tmp}\Trips-normal-names-270.xlsx"; DestDir: "{app}\files\Excel"; ExternalSize: 98926592; Components: data\big; Flags: external
 Source: "{tmp}\25LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 26264 ; Components: data\chv
 Source: "{tmp}\100LY-H.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
-Source: "{tmp}\SOPHONTS.chv"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
-Source: "{tmp}\TERRAGRP.chv"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 15360 ; Components: data\chv
+Source: "{tmp}\SOPHONTS.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 476160 ; Components: data\chv
+Source: "{tmp}\TERRAGRP.CHV"; DestDir: "{app}\files\ChView"; Flags: external; ExternalSize: 15360 ; Components: data\chv
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -143,16 +143,16 @@ begin
   if CurPageID = wpReady then begin
     DownloadPage.Clear;
     if WizardIsComponentSelected('data\small') then begin
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-70.xlsx', 'Trips-normal-names-70.xlsx', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/Trips-normal-names-70.xlsx', 'Trips-normal-names-70.xlsx', '');
     end;
     if WizardIsComponentSelected('data\big') then begin
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/Excel/Trips-normal-names-270.xlsx', 'Trips-normal-names-270.xlsx', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/Trips-normal-names-70.xlsx', 'Trips-normal-names-270.xlsx', '');
     end;
     if WizardIsComponentSelected('data\chv') then begin
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/25LY-H.CHV', '25LY-H.CHV', '');
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/100LY-H.CHV', '100LY-H.CHV', '');
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/SOPHONTS.chv', 'SOPHONTS.chv', '');
-      DownloadPage.Add('https://github.com/BoatrightTBC/trips/raw/develop/files/ChView/TERRAGRP.chv', 'TERRAGRP.chv', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/CHV/25LY-H.CHV', '25LY-H.CHV', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/CHV/100LY-H.CHV', '100LY-H.CHV', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/CHV/SOPHONTS.CHV', 'SOPHONTS.CHV', '');
+      DownloadPage.Add('https://tbcsoftware.com/trips/Datasets/CHV/TERRAGRP.CHV', 'TERRAGRP.CHV', '');
     end;
     DownloadPage.Show;
     try
